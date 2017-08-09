@@ -1,19 +1,16 @@
-#!/usr/bin/env sh
-#
 # Example 1: Naming Names
 #
 
-declare -i  _COUNTER=${INITIAL:-1}
-declare -ri _FINAL=${FINAL:-20}
-
+: "BumpCounter()" - increment _COUNTER
+#
 BumpCounter() {
-    declare -i _offset_=$1
+    declare -i _offset=${1:-1}
 
-    [ $_offset_ ] && _offset_=1
-
-    _COUNTER=$((_COUNTER + $_offset_))
+    _COUNTER=$((_COUNTER + $_offset))
 }
 
+: "Main()" - the main program
+#
 Main() {
     while [ $_COUNTER -le $_FINAL ]; do
         echo $_COUNTER
@@ -21,4 +18,14 @@ Main() {
     done
 }
 
+: Global Constants
+#
+declare -ir _FINAL=${FINAL:-20}
+
+: Global Variables
+#
+declare -i _COUNTER=${INITIAL:-1}
+
+: Execution Starts Here
+#
 Main "$@"
